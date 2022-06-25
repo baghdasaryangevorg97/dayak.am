@@ -23,7 +23,7 @@ const AppRouter = () => {
 	const location = useLocation()
 	const [pathName, setPathName] = useState()
 
-
+console.log('Test')
 	useEffect(() => {
 		setPathName(location.pathname)
 		// if (localStorage.getItem('verify')) { setVerify(true) } else { setVerify(false) }
@@ -36,6 +36,7 @@ const AppRouter = () => {
 		{/* <Routes>
 						<Route path='/' element={<Home />} />
 					</Routes> */}
+					
 		{isAuth ?
 			pathName === '/' || pathName === undefined ?
 				<Routes>
