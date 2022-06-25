@@ -1,0 +1,31 @@
+.menu-background {
+    background-color: #cac2be !important;
+}
+#signUp .select-type {
+    padding: 0.375rem 2.25rem 1rem 0.75rem;
+}
+.Authmessage {
+	padding: 5px 10px !important;
+	color: white;
+	margin-bottom: 0;
+	font-size: 14px !important;
+	font-weight: 700;
+	text-align: left;
+}
+
+.Autherror {
+	background-color: red;
+}
+
+
+ @media (min-width: 1400px){
+ #userPage .container {
+    max-width: 100% !important;
+}
+
+ }
+ @media (min-width: 1200px){}
+ #userPage .col-xl-7 {
+    flex: 0 0 auto;
+    width: 75%;
+}
