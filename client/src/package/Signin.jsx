@@ -1,19 +1,31 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import { API_BASE_URL, AxiosConfigs } from "../config";
 import { getCookie, setCookie } from "../cookie";
 import { useCookies, cookies } from 'react-cookie';
 import MenuHeader from "./MenuHeader";
+import { Redirect, Switch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { AuthContext } from "../context";
+
+
+// import { useNavigate } from "react-router-dom";
+// import { useNavigate } from 'react-router';
+
 
 
 const Signin = function () {
+    const { isAuthAdmin, setIsAuthAdmin, isAuth, setIsAuth } = useContext(AuthContext)
+    // const navigate = useNavigate()
     const [values, setValues] = useState({
         email: '',
         password: '',
     })
     const [errorMessage, setErrorMessage] = useState([])
     const [cookies, setCookie] = useCookies(['Name']);
+    let history = useHistory();
+    // const goUserpage = () => navigate('/userPage', {replace: true})  
 
     const getSigninValue = e => {
         const { name, value } = e.target;
@@ -24,6 +36,7 @@ const Signin = function () {
     }
 
     const getData = e => {
+        
         e.preventDefault()
         let data = {};
         data.remember = true
@@ -37,8 +50,12 @@ const Signin = function () {
                     // if (response.data.remember) {
                     // 	setCookie('_rmfo', '_an26:Pxk94>g8,|' + response.data._id, 365)
                     // }
-                    localStorage.setItem('auth', 'true')
-                    localStorage.setItem('authUser', token)
+
+                    localStorage.setItem('auth', 'true');
+                    localStorage.setItem('authUser', token);
+                    setIsAuth(true)
+                    history.push('/userPage') 
+                    // navigate('/userPage', {replace: true})
                 })
             .catch(error => {
                 console.log(error.response.data.error);

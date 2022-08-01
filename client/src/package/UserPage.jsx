@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import Sidebar from "./Sidebar";
+import { API_BASE_URL, AxiosConfigs } from "../config";
 const UserPage = function () {
+  const [dataNow, setDataNow] = useState({})
+
   // const [values, setValues] = useState({
   //     email: '',
   //     password: '',
@@ -16,17 +19,18 @@ const UserPage = function () {
   //     })
   // }
 
-  // const getData = e => {
-  //     let data = {};
-  //     data = values
-  //     axios.post('http://localhost:8000/api/signinForm', data)
-  //     .then(
-  //         response => {
-  //             console.log(response);
-  //         })
-  //      .catch({})
-
-  // }
+  useEffect(() => {
+		// var data = {};
+		// data.id = localStorage.getItem('authUser');
+		axios.post(API_BASE_URL + '/api/getMe', null, AxiosConfigs)
+			.then(response => {
+        console.log(response.data)
+				// setMyInfo(response.data)
+			})
+			.catch(error => {
+				// console.log(error);
+			})
+	}, []);
 
   //   $(document).ready(function () {
   //     $('#sidebarCollapse').on('click', function () {
@@ -38,7 +42,7 @@ const UserPage = function () {
   return (
     <div id="userPage" className="d-flex">
       <div className="wrapper">
-<Sidebar />
+  {/* <Sidebar /> */}
         <div id="content">
           <section className="h-100 w-100 gradient-custom-2">
             <div className=" h-100">
@@ -50,6 +54,9 @@ const UserPage = function () {
                       <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp" alt="Generic placeholder image" className="img-fluid img-thumbnail mt-4 mb-2" style={{ width: '150px', zIndex: 1 }} />
                         <button type="button" className="btn btn-outline-dark" data-mdb-ripple-color="dark" style={{ zIndex: 1 }}>
+                          Edit profile
+                        </button>
+                          <button type="button" className="btn btn-outline-dark" data-mdb-ripple-color="dark" style={{ zIndex: 1 }}>
                           Edit profile
                         </button>
                       </div>
@@ -101,12 +108,6 @@ const UserPage = function () {
           </section>
         </div>
       </div>
-
-
-
-
-
-
     </div>
   );
 

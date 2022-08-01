@@ -106,6 +106,16 @@ class UserInfoController extends Controller
         return response(['error' => ['both' => 'Incorrect Email or Password']], 422);
     }
 
+    public function GetMe() {
+        if (!auth()->user()) {
+			return response()->json(['error' => 'Unauthorized'], 401);
+		}
+		$user = UserInfo::where('id', auth()->user()->id)->first();
+		$newDate = $user->created_at->format('d/m/Y');
+		$user->formatedDate = $newDate;
+		return response()->json($user);
+    }
+
     // public function logout()
     // {
     //     $this->guard()->logout();

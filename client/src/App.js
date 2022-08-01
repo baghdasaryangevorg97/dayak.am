@@ -1,9 +1,11 @@
-import { Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import { useEffect, useState } from 'react';
 import Home from './package/Home';
 import SignUp from './package/SignUp';
 import Signin from './package/Signin';
+import "bootstrap/dist/css/bootstrap.min.css";
+// Bootstrap Bundle JS
+import "bootstrap/dist/js/bootstrap.bundle.min";
 import './css/styles.css';
 import './css/custom.css';
 import NotFound from './package/NotFound';
@@ -11,7 +13,8 @@ import { getCookie, setCookie, eraseCookie } from "./cookie";
 import UserPage from './package/UserPage';
 import AppRouter from './components/AppRouter';
 import { AuthContext } from './context';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 
 
 function App() {
@@ -35,9 +38,9 @@ function App() {
 				setIsAuthAdmin,
 				isLoading
 		}}>
-				<BrowserRouter>
+				<Router>
 					<AppRouter />
-				</BrowserRouter>
+				</Router>
 		</AuthContext.Provider>
 	</div>
   );
