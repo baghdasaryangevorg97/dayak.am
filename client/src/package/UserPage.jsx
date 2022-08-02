@@ -3,8 +3,16 @@ import { useState } from "react";
 import axios from "axios";
 import Sidebar from "./Sidebar";
 import { API_BASE_URL, AxiosConfigs } from "../config";
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserData, setUsers } from "../redux/reducers/userReducer";
+
+
 const UserPage = function () {
   const [dataNow, setDataNow] = useState({})
+  const dispatch = useDispatch();
+  const userInfo = useSelector(getUserData)
+
+  console.log(userInfo,88);
 
   // const [values, setValues] = useState({
   //     email: '',
@@ -25,6 +33,8 @@ const UserPage = function () {
 		axios.post(API_BASE_URL + '/api/getMe', null, AxiosConfigs)
 			.then(response => {
         console.log(response.data)
+        dispatch(setUsers(response.data))
+
 				// setMyInfo(response.data)
 			})
 			.catch(error => {
