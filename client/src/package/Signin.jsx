@@ -8,6 +8,8 @@ import MenuHeader from "./MenuHeader";
 import { Redirect, Switch } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../context";
+import { useSelector } from "react-redux";
+import { getUserData } from "../redux/reducers/userReducer";
 
 
 // import { useNavigate } from "react-router-dom";
@@ -36,7 +38,6 @@ const Signin = function () {
     }
 
     const getData = e => {
-        
         e.preventDefault()
         let data = {};
         data.remember = true
@@ -45,21 +46,15 @@ const Signin = function () {
         axios.post(API_BASE_URL + '/api/signinForm', data, AxiosConfigs)
             .then(
                 response => {
-                    // setCookie('Name', data);
                     const token = response.data.access_token;
-                    // if (response.data.remember) {
-                    // 	setCookie('_rmfo', '_an26:Pxk94>g8,|' + response.data._id, 365)
-                    // }
-
                     localStorage.setItem('auth', 'true');
                     localStorage.setItem('authUser', token);
                     setIsAuth(true)
+                  
                     history.push('/userPage') 
-                    // navigate('/userPage', {replace: true})
                 })
             .catch(error => {
                 console.log(error.response.data.error);
-
                 setErrorMessage(error.response.data.error)
             })
 
@@ -67,7 +62,7 @@ const Signin = function () {
 
     return (
         <div id="signin">
-            <MenuHeader />
+            <MenuHeader setIsAuth={setIsAuth}/>
             <section className="vh-100">
                 <div className="container-fluid sig-pd h-custom">
                     <div className="row d-flex justify-content-center align-items-center h-100">

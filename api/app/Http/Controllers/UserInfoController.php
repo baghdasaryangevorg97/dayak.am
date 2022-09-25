@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 
 
@@ -88,8 +89,13 @@ class UserInfoController extends Controller
                 // return $this->respondWithToken($token);
                 // return response()->json(['status' => 'success'], 200)->header('Authorization', $token);
                 if (!$token = auth()->attempt($validate->validated())) {
+                    Log::info(auth()->user());
 					return response()->json(['error' => 'Unauthorized'], 401);
 				}
+                Log::info(auth()->user());
+                
+                
+                // auth()->login($userInfo);
                 return $this->respondWithToken($token);
                 // $credentials = $request->only('email', 'password');
                 // if ($token = $this->guard()->attempt($credentials)) {
@@ -104,6 +110,11 @@ class UserInfoController extends Controller
 
  
         return response(['error' => ['both' => 'Incorrect Email or Password']], 422);
+    }
+
+    public function getGeneralInfo() {
+        return auth()->user();
+
     }
 
     public function GetMe() {

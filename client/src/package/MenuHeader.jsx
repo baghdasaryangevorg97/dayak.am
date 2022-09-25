@@ -3,8 +3,13 @@ import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { Link } from "react-router-dom";
     
-const MenuHeader = function () {
-
+const MenuHeader = function (props) {
+    const {setIsAuth} = props;
+    // const logout = () => {
+	// 	localStorage.removeItem('authUser')
+	// 	localStorage.removeItem('auth')
+	// 	window.location.href = '/signin'
+	// }
 
     return (
         <div className="menu-header">
@@ -22,6 +27,7 @@ const MenuHeader = function () {
                             <li className="nav-item"><a className="nav-link" href="#about">About</a></li>
                             <li className="nav-item"><a className="nav-link" href="#team">Team</a></li>
                             <li className="nav-item"><a className="nav-link" href="#contact">Contact</a></li>
+                            {/* <li className="nav-item"><a className="nav-link" href="#contact"><button type='button' onClick={()=>logout}>Logout</button></a></li> */}
                         </ul>
                     </div>
                     <div className="collapse navbar-collapse" id="navbarResponsive">

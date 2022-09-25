@@ -4,16 +4,24 @@ import axios from "axios";
 import Sidebar from "./Sidebar";
 import { API_BASE_URL, AxiosConfigs } from "../config";
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserData, setUsers } from "../redux/reducers/userReducer";
+import { getGeneralUserInfo, getUserData, getUserGeneralData, setUsers } from "../redux/reducers/userReducer";
 
 
 const UserPage = function () {
   const [dataNow, setDataNow] = useState({})
-  const dispatch = useDispatch();
+  const dispatch = useDispatch( )
   const userInfo = useSelector(getUserData)
+  const [user, setUser] = useState({})
+const genData = useSelector(getUserGeneralData)
+  useEffect(()=>{
+    setUser(userInfo);
+  }, [userInfo])
 
-  console.log(userInfo,88);
-
+  console.log(genData,888);
+  useEffect(()=>{
+    dispatch(getGeneralUserInfo())
+  }, [])
+console.log(user);
   // const [values, setValues] = useState({
   //     email: '',
   //     password: '',
@@ -27,18 +35,25 @@ const UserPage = function () {
   //     })
   // }
 
+  const signOutProfile = () => {
+					localStorage.removeItem('auth')
+					localStorage.removeItem('authUser')
+          window.location.href = 'signin'
+  }
+
   useEffect(() => {
 		// var data = {};
 		// data.id = localStorage.getItem('authUser');
 		axios.post(API_BASE_URL + '/api/getMe', null, AxiosConfigs)
 			.then(response => {
-        console.log(response.data)
+        console.log(response.data,999)
         dispatch(setUsers(response.data))
+        dispatch(getGeneralUserInfo())
 
 				// setMyInfo(response.data)
 			})
 			.catch(error => {
-				// console.log(error);
+				console.log(error);
 			})
 	}, []);
 
@@ -66,12 +81,12 @@ const UserPage = function () {
                         <button type="button" className="btn btn-outline-dark" data-mdb-ripple-color="dark" style={{ zIndex: 1 }}>
                           Edit profile
                         </button>
-                          <button type="button" className="btn btn-outline-dark" data-mdb-ripple-color="dark" style={{ zIndex: 1 }}>
-                          Edit profile
+                          <button type="button" className="btn btn-outline-dark" onClick={signOutProfile} data-mdb-ripple-color="dark" style={{ zIndex: 1 }}>
+                          Sign out
                         </button>
                       </div>
                       <div className="ms-3" style={{ marginTop: '130px' }}>
-                        <h5>Andy Horwitz</h5>
+                        <h5>{user.name}</h5>
                         <p>New York</p>
                       </div>
                     </div>
