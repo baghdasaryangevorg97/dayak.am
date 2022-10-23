@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('user_infos', function (Blueprint $table) {
-            $table->longText('api_token')->nullable();
+            $table->string('photo')->nullable();
         });
     }
 

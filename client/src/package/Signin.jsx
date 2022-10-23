@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useContext } from "react";
 import axios from "axios";
-import { API_BASE_URL, AxiosConfigs } from "../config";
+import { API_BASE_URL, AxiosConfigs, getAxiosConfig } from "../config";
 import { getCookie, setCookie } from "../cookie";
 import { useCookies, cookies } from 'react-cookie';
 import MenuHeader from "./MenuHeader";
@@ -43,7 +43,7 @@ const Signin = function () {
         data.remember = true
         data = values
         console.log(data);
-        axios.post(API_BASE_URL + '/api/signinForm', data, AxiosConfigs)
+        axios.post(API_BASE_URL + '/api/signinForm', data, getAxiosConfig())
             .then(
                 response => {
                     const token = response.data.access_token;

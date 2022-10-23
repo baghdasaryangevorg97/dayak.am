@@ -127,6 +127,27 @@ class UserInfoController extends Controller
 		return response()->json($user);
     }
 
+    public function userEdit (Request $request) {
+        $data = $request->all();
+        if(UserInfo::where('id', auth()->user()->id)->first()){
+            foreach ($data['editData'] as $key => $editInfo) {
+               UserInfo::where('id', auth()->user()->id)->update([$key =>$editInfo]);
+            }
+        }
+        $dataReady = UserInfo::where('id', auth()->user()->id)->first();
+        return response()->json($dataReady);
+    }
+
+    public function uploadPhoto(Request $request) {
+        $data = $request->all();
+        $fileName = time().'.'.$request->file->extension(); 
+        $request->file->move(public_path('images'), $fileName);
+        if( $dataNow = UserInfo::where('id', $data['userId'])->first()){ 
+            UserInfo::where('id', $data['userId'])->update(['photo' => $fileName]);
+        }
+        return response()->json($dataNow);
+    }
+
     // public function logout()
     // {
     //     $this->guard()->logout();

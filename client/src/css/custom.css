@@ -17,6 +17,10 @@
 	background-color: red;
 }
 
+.user-data-show h5 {
+	text-align: left;
+}
+
 
  @media (min-width: 1400px){
  #userPage .container {

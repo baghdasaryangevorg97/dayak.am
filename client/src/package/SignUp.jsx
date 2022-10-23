@@ -51,6 +51,7 @@ const SignUp = function () {
     data = values;
     axios.post(API_BASE_URL + '/api/signup', data)
       .then(response => {
+        window.location.href = window.location.origin + '/signin'
         console.log(response);
       })
       .catch(error => {
@@ -174,9 +175,3 @@ const SignUp = function () {
 }
 
 export default SignUp
-
-
-
-
-
-

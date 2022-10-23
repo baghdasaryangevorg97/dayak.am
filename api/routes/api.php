@@ -24,6 +24,8 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('/signinForm', [App\Http\Controllers\UserInfoController::class, 'signinForm']);
     Route::post('/getMe', [App\Http\Controllers\UserInfoController::class, 'GetMe']);
     Route::post('/getGeneralInfo', [App\Http\Controllers\UserInfoController::class, 'getGeneralInfo']);
+    Route::post('/userEdit', [App\Http\Controllers\UserInfoController::class, 'userEdit']);
+    Route::post('/uploadPhoto', [App\Http\Controllers\UserInfoController::class, 'uploadPhoto']);
 });
 
 
