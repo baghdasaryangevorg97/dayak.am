@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getGeneralUserInfo, getUserData, getUserGeneralData, setUsers } from "../redux/reducers/userReducer";
 import UserMenu from "./UserMenu";
 import UserEdit from "./UserEdit";
+import PhotoLoader from "../../src/assets/img/photoLoader.gif";
+import EditPhoto from "./EditPhoto";
 
 
 const UserPage = function () {
@@ -70,10 +72,12 @@ const genData = useSelector(getUserGeneralData)
               <div className="row d-flex justify-content-center align-items-center h-100">
                 <div className="">
                   <div className="card">
-                    <div className="rounded-top text-white d-flex flex-row cover-photo" style={{ backgroundColor: '#000', height: '200px' }}>
+                    <div className="rounded-top text-white d-flex flex-row " style={{ backgroundColor: '#000', height: '200px' }}>
                       <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
-                        {/* <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp" alt="Generic placeholder image" className="img-fluid img-thumbnail mt-4 mb-2" style={{ width: '150px', zIndex: 1 }} /> */}
-                        <img key={userInfo.photo} src={'http://localhost:8000/public/images/'+userInfo.photo} className="img-fluid img-thumbnail mt-4 mb-2" style={{ width: '150px', zIndex: 1 }} />
+                        <div>
+                          <img key={userInfo.photo} src={userInfo.photo?API_BASE_URL +'/images/' + userInfo.photo:PhotoLoader} className="img-fluid img-thumbnail mt-4 mb-2"  style={{ width: '150px', height: '160px' }} />
+                        </div>
+                        <EditPhoto />
                         <UserEdit userInfo={userInfo} />
                       </div>
                       <div className="ms-3 user-data-show" style={{ marginTop: '130px' }}>

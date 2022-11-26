@@ -11779,6 +11779,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 .cover-photo {
-  background-image: url("https://source.unsplash.com/random/400*400");
+  /* background-image: url("https://source.unsplash.com/random/400*400"); */
+  background-color: #0aa2c0;
   background-size: cover;
 }

@@ -28,6 +28,7 @@ const UserEdit = (props) => {
     function submitPhoto(event) {
         event.preventDefault()
         const formData = new FormData();
+        console.log(file.name,888);
         formData.append('file', file);
         formData.append('fileName', file.name);
         formData.append('userId', userInfo.id);

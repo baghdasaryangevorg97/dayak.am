@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use File;
 
 
 
@@ -142,8 +143,18 @@ class UserInfoController extends Controller
         $data = $request->all();
         $fileName = time().'.'.$request->file->extension(); 
         $request->file->move(public_path('images'), $fileName);
-        if( $dataNow = UserInfo::where('id', $data['userId'])->first()){ 
-            UserInfo::where('id', $data['userId'])->update(['photo' => $fileName]);
+        if(UserInfo::where('id', $data['userId'])->first()){ 
+            $users =   UserInfo::where('id', $data['userId']);
+            // $oldFIleName = $users->first()->photo;
+            $users->update(['photo' => $fileName]);
+            // $image_path = "/images/{$oldFIleName}"; 
+            // if(File::exists($image_path)) {
+            //     File::delete($image_path);
+            // }
+            $dataNow = UserInfo::where('id', $data['userId'])->first();
+        }
+        else {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
         return response()->json($dataNow);
     }
