@@ -33,7 +33,6 @@ const UserEdit = (props) => {
             'content-type': 'multipart/form-data',
           },
         };
-        console.log(formData);
         axios.post(API_BASE_URL + '/api/uploadPhoto', formData, config)
         .then((response) => {
             setShow(false)

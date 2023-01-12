@@ -21,29 +21,29 @@ const UserEdit = (props) => {
     const [file, setFile] = useState()
 
 
-    function changePhoto(event) {
-        setFile(event.target.files[0])
-    }
+    // function changePhoto(event) {
+    //     setFile(event.target.files[0])
+    // }
 
-    function submitPhoto(event) {
-        event.preventDefault()
-        const formData = new FormData();
-        console.log(file.name,888);
-        formData.append('file', file);
-        formData.append('fileName', file.name);
-        formData.append('userId', userInfo.id);
-        const config = {
-          headers: {
-            'content-type': 'multipart/form-data',
-          },
-        };
-        console.log(formData);
-        axios.post(API_BASE_URL + '/api/uploadPhoto', formData, config)
-        .then((response) => {
-          console.log(response.data);
-        });
+    // function submitPhoto(event) {
+    //     event.preventDefault()
+    //     const formData = new FormData();
+    //     console.log(file.name,888);
+    //     formData.append('file', file);
+    //     formData.append('fileName', file.name);
+    //     formData.append('userId', userInfo.id);
+    //     const config = {
+    //       headers: {
+    //         'content-type': 'multipart/form-data',
+    //       },
+    //     };
+    //     console.log(formData);
+    //     axios.post(API_BASE_URL + '/api/uploadPhoto', formData, config)
+    //     .then((response) => {
+    //       console.log(response.data);
+    //     });
     
-      }
+    //   }
 
     // useEffect(()=>{
     //     setDataNow(userInfo)
@@ -119,12 +119,21 @@ const UserEdit = (props) => {
                                 onChange={e=>editValue(e)}
                             />
                         </Form.Group>
+                        <Form.Group className="mb-3" controlId="ControlInput4">
+                            <Form.Label>Country</Form.Label>
+                            <Form.Control
+                                name='country'
+                                type="text"
+                                defaultValue="country"
+                                onChange={e=>editValue(e)}
+                            />
+                        </Form.Group>
                     </Form>
-                    <form>
+                    {/* <form>
                         <h5>Upload photo</h5>
                         <input type="file" onChange={changePhoto} />
                         <button type="submit" onClick={submitPhoto}>Upload</button>
-                    </form>
+                    </form> */}
                 </Modal.Body>   
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

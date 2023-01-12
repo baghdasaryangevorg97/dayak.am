@@ -145,12 +145,12 @@ class UserInfoController extends Controller
         $request->file->move(public_path('images'), $fileName);
         if(UserInfo::where('id', $data['userId'])->first()){ 
             $users =   UserInfo::where('id', $data['userId']);
-            // $oldFIleName = $users->first()->photo;
+            $oldFIleName = $users->first()->photo;
             $users->update(['photo' => $fileName]);
-            // $image_path = "/images/{$oldFIleName}"; 
-            // if(File::exists($image_path)) {
-            //     File::delete($image_path);
-            // }
+            $image_path = "images/{$oldFIleName}"; 
+            if(File::exists($image_path)) {
+                File::delete($image_path);
+            }
             $dataNow = UserInfo::where('id', $data['userId'])->first();
         }
         else {
@@ -158,7 +158,11 @@ class UserInfoController extends Controller
         }
         return response()->json($dataNow);
     }
-
+public function addExperience(Request $request){
+    $data = $request->all();
+    $data -> userId = auth()->user()->id;
+    Experience::create($data);
+}
     // public function logout()
     // {
     //     $this->guard()->logout();

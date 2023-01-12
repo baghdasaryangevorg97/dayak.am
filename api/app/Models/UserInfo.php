@@ -25,6 +25,7 @@ class UserInfo extends Authenticatable implements JWTSubject
         'type',
         'age',
         'password',
+        'country'
     ];
 
     public function getJWTIdentifier()
@@ -36,4 +37,16 @@ class UserInfo extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    const TYPE_ENPLOYEE = 1,
+          TYPE_ENPLOYER = 2;
+
+public static function getPackageNames () {
+    return [
+        self::TYPE_ENPLOYEE  => 'enployee',
+        self::TYPE_ENPLOYER => 'enployer',
+    ];
+}
+
+    
 }
